@@ -72,3 +72,13 @@ test("fails when an app without accounts has a delete-account page", () => {
     expect(r.out).toContain(`unexpected delete-account page for ${app.id}`);
   });
 });
+
+test("removes the placeholder page Next.js needs for a route with no pages", () => {
+  withCopy((dir) => {
+    const placeholder = path.join(dir, locales[0], "apps", "_unused");
+    fs.mkdirSync(placeholder, { recursive: true });
+    fs.writeFileSync(path.join(placeholder, "delete-account.html"), "<p>404</p>");
+    expect(postbuild(dir).code).toBe(0);
+    expect(fs.existsSync(placeholder)).toBe(false);
+  });
+});

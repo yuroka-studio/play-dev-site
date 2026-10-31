@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Doc } from "@/components/Doc";
 import { PageShell } from "@/components/PageShell";
-import { appsWithAccounts, findApp, hasLegal, legalLocales, locales, paths, site, type Locale } from "@/lib/config";
+import { appsWithAccounts, findApp, hasLegal, legalLocales, locales, nonEmpty, paths, site, type Locale } from "@/lib/config";
 import { buildDeletePage } from "@/lib/delete-page";
 import { pageMetadata, withStudio } from "@/lib/metadata";
 
@@ -13,7 +13,7 @@ import { pageMetadata, withStudio } from "@/lib/metadata";
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return legalLocales.flatMap((locale) => appsWithAccounts.map((app) => ({ locale, app: app.id })));
+  return nonEmpty(legalLocales.flatMap((locale) => appsWithAccounts.map((app) => ({ locale, app: app.id }))));
 }
 
 type Props = { params: Promise<{ locale: Locale; app: string }> };

@@ -84,6 +84,11 @@ fs.writeFileSync(path.join(out, "index.html"), chooser);
 fs.writeFileSync(path.join(out, ".nojekyll"), "");
 fs.rmSync(path.join(out, "_not-found.html"), { force: true });
 
+// Next.js refuses an empty generateStaticParams() with output "export", so a
+// route with no pages (no apps, or no app with accounts) generates one
+// placeholder page (see nonEmpty() in lib/config.ts). It is not a real page: drop it.
+for (const l of locales) fs.rmSync(path.join(out, l, "apps", "_unused"), { recursive: true, force: true });
+
 let removed = 0;
 (function prune(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {

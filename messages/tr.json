@@ -120,6 +120,7 @@
     "collect": {
       "heading": "Uygulamanın işlediği bilgiler",
       "deviceOnly": "{app}, ayarlarınız ve uygulamada oluşturduklarınız gibi verileri cihazınızda tutar. Bu bilgiler bize veya uygulama için işletilen herhangi bir sunucuya gönderilmez; bu yüzden onları göremeyiz.",
+      "deviceOnlyServices": "{app}, ayarlarınız ve uygulamada oluşturduklarınız gibi verileri cihazınızda tutar. Uygulama bu bilgileri bize göndermez; bu yüzden onları göremeyiz. Aşağıdaki bölümler, bazı bilgileri ayrıca işleyen diğer hizmetleri anlatır.",
       "deviceBackup": "Cihaz ayarlarınıza bağlı olarak Android, uygulama verilerini Google hesabı yedeğinize dahil edebilir. Bunu bizim değil, cihazınızın ve Google’ın ayarları belirler.",
       "server": "Uygulama, çalışabilmesi için bir sunucuya şunları gönderir: {list}.",
       "serverUse": "Bu bilgileri uygulamanın özelliklerini sunmak ve sürdürmek, ayrıca taleplerinizi yanıtlamak için kullanırız.",

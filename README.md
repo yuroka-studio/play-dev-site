@@ -22,7 +22,7 @@ English and Turkish are included in full. Another language is one new messages f
 - **Free hosting.** Netlify's free tier is the main target. GitHub Pages and Cloudflare Pages work too.
 - **Small.** Four runtime dependencies (`next`, `next-intl`, `react`, `react-dom`), system fonts, plain CSS, about 1 MB of output, a build of a few seconds.
 
-> **The generated policy text is a starting template, not legal advice.** It is written from your answers and says nothing you did not tell it, but you must read it, check it against what your apps really do, and have it reviewed if the stakes call for it. Every policy page says so until you switch the note off (see [Review the text](#review-the-text)).
+> **The generated policy text is a starting template, not legal advice.** It is written from your answers and says nothing you did not tell it, but you must read it, check it against what your apps really do, and have it reviewed if the stakes call for it. Every policy page says so (see [Review the text](#review-the-text)).
 
 ## What Google Play requires, and which page covers it
 
@@ -90,7 +90,7 @@ The policy names no specific law. It uses neutral wording ("depending on where y
 
 ### Review the text
 
-Read every generated page (`npm run dev` shows them all). Every policy page carries a visible note: *starting template, not legal advice, the developer must review it*. After you have reviewed the text (or had it reviewed), set `showTemplateNotice: false` in `site.config.ts` to hide the note, and set `policyLastUpdated` to the date you finished. Change `policyLastUpdated` again whenever you change a policy or an app's answers.
+Read every generated page (`npm run dev` shows them all). Every policy page carries a visible note: *starting template, not legal advice, the developer must review it*. It is part of the template (the wording is `legal.templateNotice` in `messages/*.json`). Once you have reviewed the text, or had it reviewed, set `policyLastUpdated` to the date you finished, and change it again whenever you change a policy or an app's answers.
 
 Things the template does **not** cover, so check them yourself: apps aimed at children (Play's Families rules), the exact data your SDKs collect (read their documentation), the Play Console **Data safety** form (its answers must match your policy), and any law that applies to you specifically.
 
@@ -217,7 +217,7 @@ docs/                GitHub Pages workflow, screenshots
 - **Hızlı başlangıç:** "Use this template" ile kendi deponuzu oluşturun, `npm install`, `site.config.ts` dosyasını kendi bilgilerinizle doldurun, `npm run build`, ardından `out/` klasörünü yayınlayın. Örnek değerler ("Example Studio" gibi) dosyada kaldığı sürece derleme bilinçli olarak hata verir.
 - **Ücretsiz yayın:** Netlify (önerilen), GitHub Pages veya Cloudflare Pages. GitHub Pages ve Cloudflare Pages'te dil yönlendirmesi çalışmaz; kök sayfa dil seçimi sunar.
 - **Alan adı doğrulama:** Kurumsal Play hesapları için zorunlu, kişisel hesaplar için önerilir. Search Console'da "Domain" özelliği ekleyin, verilen `google-site-verification=...` TXT kaydını DNS sağlayıcınıza ekleyin ve "Verify" düğmesine basın.
-- **Önemli uyarı:** Üretilen politika metinleri bir başlangıç şablonudur, **hukuki tavsiye değildir**. Metni uygulamanızın gerçekte yaptıklarıyla karşılaştırıp kendiniz gözden geçirmelisiniz. İncelemeyi bitirince `showTemplateNotice: false` yapıp `policyLastUpdated` tarihini güncelleyin.
+- **Önemli uyarı:** Üretilen politika metinleri bir başlangıç şablonudur, **hukuki tavsiye değildir**. Metni uygulamanızın gerçekte yaptıklarıyla karşılaştırıp kendiniz gözden geçirmelisiniz. İncelemeyi bitirince `policyLastUpdated` tarihini güncelleyin.
 - **Play Console'a URL yapıştırmadan önce:** yukarıdaki İngilizce kontrol listesini tamamlayın. Gizlilik politikası adresi `https://alan.adiniz/tr/apps/<uygulama-id>/privacy`, hesap silme adresi `https://alan.adiniz/tr/apps/<uygulama-id>/delete-account` biçimindedir.
 
 ## Credit and license

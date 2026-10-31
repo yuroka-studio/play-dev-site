@@ -80,12 +80,6 @@ const config: SiteConfig<Locale> = {
   /** "Last updated" date on every policy, YYYY-MM-DD. Change it whenever you change a policy or an app's answers. */
   policyLastUpdated: "2026-11-01",
 
-  /**
-   * Shows the note "starting template, not legal advice, review it" on every
-   * policy page. Keep it true until you (or a lawyer) have reviewed the text.
-   */
-  showTemplateNotice: true,
-
   // --- Apps ----------------------------------------------------------------
   //
   // One entry per app. The `practices` block is a checklist about what the

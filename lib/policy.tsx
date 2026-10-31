@@ -44,7 +44,10 @@ export async function buildAppPolicy(app: App, locale: Locale): Promise<AppPolic
   // --- Information handled ---
   const collect: Section["blocks"] = [];
   if (!server) {
-    collect.push({ kind: "p", content: t("collect.deviceOnly", { app: app.name }) });
+    // third parties (SDKs, ads, Google Play purchases) handle some information on their own,
+    // so the "nothing leaves the device" wording is only used when none are involved
+    const key = thirdParties || p.payments ? "collect.deviceOnlyServices" : "collect.deviceOnly";
+    collect.push({ kind: "p", content: t(key, { app: app.name }) });
     collect.push({ kind: "p", content: t("collect.deviceBackup") });
   } else {
     if (p.hasAccount) {

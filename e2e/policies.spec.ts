@@ -42,19 +42,19 @@ test.describe("app privacy policies", () => {
 
         // the review note
         const notice = page.getByTestId("template-notice");
-        if (config.showTemplateNotice) {
-          await expect(notice).toBeVisible();
-          await expect(notice).toContainText(m.legal.templateNotice);
-        } else {
-          await expect(notice).toHaveCount(0);
-        }
+        await expect(notice).toBeVisible();
+        await expect(notice).toContainText(m.legal.templateNotice);
         const updated = new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "UTC" }).format(new Date(`${config.policyLastUpdated}T00:00:00Z`));
         await expect(page.locator(".meta")).toContainText(updated);
 
         // storage
+        const otherParties = p.sdks.length > 0 || p.ads !== false || p.payments;
         if (p.storage === "device-only") {
           expect(text).toContain(m.policy.short.deviceOnly);
-          expect(text).toContain(m.policy.sharing.none);
+          const collect = otherParties ? m.policy.collect.deviceOnlyServices : m.policy.collect.deviceOnly;
+          expect(text).toContain(collect.replace("{app}", app.name));
+          // "nothing is shared" only when no SDK, ad network or purchase flow is involved
+          expect(text).toContain(otherParties ? m.policy.sharing.some : m.policy.sharing.none);
         } else {
           expect(text).toContain(m.policy.short.server);
           expect(text).toContain(m.policy.security.body);

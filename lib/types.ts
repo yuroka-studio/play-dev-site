@@ -182,7 +182,5 @@ export interface SiteConfig<L extends string> {
   hosting: Hosting;
   /** ISO date (YYYY-MM-DD) shown as "Last updated" on every policy. Change it whenever you change a policy. */
   policyLastUpdated: string;
-  /** Show the "starting template, not legal advice" note on policy pages. Keep true until you have reviewed the text. */
-  showTemplateNotice: boolean;
   apps: AppConfig<L>[];
 }

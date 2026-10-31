@@ -70,11 +70,9 @@ export async function Doc({
         {intro ? <p className="lede">{intro}</p> : null}
       </header>
 
-      {site.showTemplateNotice ? (
-        <div className="notice" role="note" data-testid="template-notice">
-          <strong>{t("templateNoticeLabel")}.</strong> {t("templateNotice")}
-        </div>
-      ) : null}
+      <div className="notice" role="note" data-testid="template-notice">
+        <strong>{t("templateNoticeLabel")}.</strong> {t("templateNotice")}
+      </div>
 
       {summary && summary.length > 0 ? (
         <section className="short" aria-labelledby="in-short">

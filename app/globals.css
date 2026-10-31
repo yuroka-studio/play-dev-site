@@ -223,10 +223,9 @@ button:focus-visible {
 .eyebrow {
   margin: 0 0 0.6rem;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .lede {

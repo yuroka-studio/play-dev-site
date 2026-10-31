@@ -40,6 +40,19 @@ export function hasAccount(app: App): boolean {
 
 export const appsWithAccounts: readonly App[] = apps.filter(hasAccount);
 
+/** App id of the one throw-away page generated when a route would otherwise have no pages (see `nonEmpty`). */
+export const PLACEHOLDER_APP = "_unused";
+
+/**
+ * Next.js refuses an empty generateStaticParams() with output "export", which
+ * happens for the delete-account route when no app has accounts (or for the
+ * privacy route when there are no apps). In that case one placeholder page is
+ * generated instead: it renders the 404 view, and scripts/postbuild.mjs deletes it.
+ */
+export function nonEmpty(params: { locale: Locale; app: string }[]): { locale: Locale; app: string }[] {
+  return params.length > 0 ? params : [{ locale: defaultLocale, app: PLACEHOLDER_APP }];
+}
+
 /** Route builders; one place for every internal URL. */
 export const paths = {
   home: (l: Locale) => `/${l}`,

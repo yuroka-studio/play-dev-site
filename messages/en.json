@@ -120,6 +120,7 @@
     "collect": {
       "heading": "Information the app handles",
       "deviceOnly": "{app} keeps its data, such as your settings and the things you create in it, on your device. That information is not sent to us or to any server run for the app, so we cannot see it.",
+      "deviceOnlyServices": "{app} keeps its data, such as your settings and the things you create in it, on your device. The app does not send that information to us, so we cannot see it. The sections below describe the other services involved, which handle some information separately.",
       "deviceBackup": "Depending on your device settings, Android may include app data in your Google account backup. That is controlled by your device and Google settings, not by us.",
       "server": "The app sends the following to a server so that it can work: {list}.",
       "serverUse": "We use this information to provide and maintain the app’s features and to answer your requests.",
