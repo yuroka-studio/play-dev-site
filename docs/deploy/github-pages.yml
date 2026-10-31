@@ -1,0 +1,45 @@
+# Deploys the site to GitHub Pages (free for public repositories).
+#
+# To use it: copy this file to .github/workflows/pages.yml, then in your
+# repository open Settings > Pages and set Source to "GitHub Actions".
+# Read "GitHub Pages" in the README first: it needs a custom domain (or a
+# repository named <name>.github.io) and has no language redirect.
+#
+# It is kept out of .github/workflows on purpose, so the template never deploys
+# the example site by accident. The build fails until site.config.ts is yours.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+      - id: deployment
+        uses: actions/deploy-pages@v4
