@@ -185,6 +185,8 @@ Keep the TXT record in place; removing it can undo the verification.
 | `npm run test:e2e` | Playwright + axe against the built site (`npx playwright install chromium` the first time) |
 | `npm test` | Build, then the tests |
 
+In `npm run dev`, an address that is not generated (for example the delete page of an app without accounts) shows an error page instead of the 404; the built site answers 404.
+
 The post-build step (`scripts/postbuild.mjs`) writes the language chooser, removes unused files, checks that every page the config implies exists and that `netlify.toml` covers every language, and runs the hygiene scan: it fails on leftover example values (unless `ALLOW_EXAMPLE=1`) and on trackers or iframe embeds (never allowed).
 
 `ALLOW_EXAMPLE=1` exists for CI and previews of the example. The CI workflow in this repository sets it; in your own repository, delete that line from `.github/workflows/ci.yml` after you have filled in the config, so CI blocks placeholders too.
