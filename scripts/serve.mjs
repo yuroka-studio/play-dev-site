@@ -7,7 +7,11 @@
 // Used by `npm start` and by the Playwright suite (port 4100). Production is
 // your real host.
 //
-// Usage: node scripts/serve.mjs [--port 4100] [--dir out]
+// It listens on this computer only (127.0.0.1), so a preview of the example
+// site, or of a site you have not published yet, is not reachable from your
+// network. Pass --host 0.0.0.0 to open it to the network on purpose.
+//
+// Usage: node scripts/serve.mjs [--port 4100] [--dir out] [--host 127.0.0.1]
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
@@ -17,10 +21,16 @@ import { parse } from "smol-toml";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const arg = (name, def) => {
   const i = process.argv.indexOf(`--${name}`);
-  return i > -1 ? process.argv[i + 1] : def;
+  if (i === -1) return def;
+  if (!process.argv[i + 1]) {
+    console.error(`serve: --${name} needs a value, for example: node scripts/serve.mjs --${name} ${def}`);
+    process.exit(1);
+  }
+  return process.argv[i + 1];
 };
 const PORT = Number(arg("port", process.env.PORT ?? 4100));
 const DIR = path.resolve(root, arg("dir", "out"));
+const HOST = arg("host", "127.0.0.1");
 const config = parse(fs.readFileSync(path.join(root, "netlify.toml"), "utf8"));
 const redirects = config.redirects ?? [];
 const headerRules = config.headers ?? [];
@@ -136,4 +146,4 @@ const server = http.createServer((req, res) => {
   res.end("Not found");
 });
 
-server.listen(PORT, () => console.log(`serving ${path.relative(root, DIR)}/ on http://localhost:${PORT}`));
+server.listen(PORT, HOST, () => console.log(`serving ${path.relative(root, DIR)}/ on http://${HOST === "127.0.0.1" ? "localhost" : HOST}:${PORT}`));

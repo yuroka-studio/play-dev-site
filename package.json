@@ -7,17 +7,18 @@
   "license": "MIT",
   "author": "Yuroka Studio",
   "engines": {
-    "node": ">=22.18"
+    "node": "^22.18.0 || >=24"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && node scripts/postbuild.mjs",
+    "dev": "node scripts/next.mjs dev",
+    "build": "node scripts/next.mjs build && node scripts/postbuild.mjs",
     "start": "node scripts/serve.mjs",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "check": "npm run lint && npm run typecheck",
     "test:e2e": "playwright test",
-    "test": "npm run build && playwright test"
+    "test": "npm run build && playwright test",
+    "test:example": "node scripts/test-example.mjs"
   },
   "dependencies": {
     "next": "16.4.3",

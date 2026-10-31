@@ -11,7 +11,11 @@
 //  4. Hygiene gate: fails when example values from site.config.ts are still in
 //     the output (unless ALLOW_EXAMPLE=1) or when a tracker/embed appears.
 //
-// Safe to run twice. Usage: node scripts/postbuild.mjs [--dir out]
+// Safe to run twice. It only touches a Next.js static export (a folder with
+// _next/ in it) and refuses any other folder before changing a file. When a
+// check in step 3 or 4 fails it deletes the folder, so a failed build cannot be
+// deployed by mistake (for example `npm run build; netlify deploy --dir out`).
+// Usage: node scripts/postbuild.mjs [--dir out]
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,9 +26,28 @@ import config from "../site.config.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const argDir = process.argv.indexOf("--dir");
+if (argDir > -1 && !process.argv[argDir + 1]) {
+  console.error("postbuild: --dir needs a folder, for example: node scripts/postbuild.mjs --dir out");
+  process.exit(1);
+}
 const out = path.resolve(root, argDir > -1 ? process.argv[argDir + 1] : "out");
+const shown = path.relative(root, out) || ".";
 if (!fs.existsSync(out)) {
-  console.error('postbuild: out/ is missing: run "next build" first.');
+  console.error(`postbuild: ${shown}/ is missing: run "next build" first.`);
+  process.exit(1);
+}
+// Steps 1 and 2 write and delete files, so make sure this really is a Next.js
+// export before they run (a typo in --dir must not cost anyone their files).
+if (!fs.existsSync(path.join(out, "_next"))) {
+  console.error(`postbuild: ${shown}/ has no _next/ folder, so it is not a Next.js static export. Nothing was changed.`);
+  process.exit(1);
+}
+
+/** Exit 1 after removing the build folder: a failed build must not be deployable. */
+function fail(message) {
+  console.error(message);
+  fs.rmSync(out, { recursive: true, force: true });
+  console.error(`postbuild: removed ${shown}/ so this build cannot be deployed by mistake. Fix the problems above and run the build again.`);
   process.exit(1);
 }
 
@@ -82,13 +105,17 @@ fs.writeFileSync(path.join(out, "index.html"), chooser);
 
 // --- 2. housekeeping --------------------------------------------------------
 fs.writeFileSync(path.join(out, ".nojekyll"), "");
-fs.rmSync(path.join(out, "_not-found.html"), { force: true });
 
 // Next.js refuses an empty generateStaticParams() with output "export", so a
 // route with no pages (no apps, or no app with accounts) generates one
 // placeholder page (see nonEmpty() in lib/config.ts). It is not a real page: drop it.
 for (const l of locales) fs.rmSync(path.join(out, l, "apps", "_unused"), { recursive: true, force: true });
 
+// Next.js writes a React Server Components payload next to every page: either
+// "<page>.txt" beside "<page>.html", or a "__next.*.txt" file in the page's
+// folder. A static site never reads them. Any other .txt file (robots.txt, and
+// ads.txt or humans.txt if you add them under public/) is yours and stays.
+const isPayload = (p) => path.basename(p).startsWith("__next.") || fs.existsSync(p.replace(/\.txt$/, ".html"));
 let removed = 0;
 (function prune(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -96,12 +123,13 @@ let removed = 0;
     if (e.isDirectory()) {
       prune(p);
       if (fs.readdirSync(p).length === 0) fs.rmdirSync(p);
-    } else if (e.name.endsWith(".txt") && path.relative(out, p) !== "robots.txt") {
+    } else if (e.name.endsWith(".txt") && isPayload(p)) {
       fs.unlinkSync(p);
       removed += 1;
     }
   }
 })(out);
+fs.rmSync(path.join(out, "_not-found.html"), { force: true });
 
 const netlifyToml = path.join(root, "netlify.toml");
 const netlify = fs.existsSync(netlifyToml) ? parse(fs.readFileSync(netlifyToml, "utf8")) : null;
@@ -151,15 +179,13 @@ if (netlify) {
 }
 
 if (problems.length > 0) {
-  console.error(`postbuild: ${problems.length} problem${problems.length === 1 ? "" : "s"}:\n  - ${problems.join("\n  - ")}`);
-  process.exit(1);
+  fail(`postbuild: ${problems.length} problem${problems.length === 1 ? "" : "s"}:\n  - ${problems.join("\n  - ")}`);
 }
 
 // --- 4. hygiene gate ------------------------------------------------------------
 const result = scan(out);
 if (!report(result, { allowExample: process.env.ALLOW_EXAMPLE === "1" })) {
-  console.error("\npostbuild: build failed the hygiene gate.");
-  process.exit(1);
+  fail("\npostbuild: build failed the hygiene gate.");
 }
 
 let bytes = 0;

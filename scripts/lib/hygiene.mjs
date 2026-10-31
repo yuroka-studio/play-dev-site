@@ -93,7 +93,7 @@ export function report(result, { allowExample = false, log = console } = {}) {
       log.error(
         `\nThe build still contains values from the example site.config.ts, so it is not safe to publish:\n${summarize(result.placeholders)}\n\n` +
           `Fix: edit site.config.ts (studio name, developer name, email, country, website URL and your apps).\n` +
-          `To build the example on purpose (CI, previews), run with ALLOW_EXAMPLE=1.`,
+          `To build the example on purpose (CI, previews), run with ALLOW_EXAMPLE=1; to run the tests on the example, use: npm run test:example`,
       );
     }
   }

@@ -7,6 +7,10 @@ import { report, scan } from "./lib/hygiene.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const i = process.argv.indexOf("--dir");
+if (i > -1 && !process.argv[i + 1]) {
+  console.error("hygiene: --dir needs a folder, for example: node scripts/check-placeholders.mjs --dir out");
+  process.exit(1);
+}
 const dir = path.resolve(root, i > -1 ? process.argv[i + 1] : "out");
 if (!fs.existsSync(dir)) {
   console.error(`${dir} does not exist: run "npm run build" first.`);
