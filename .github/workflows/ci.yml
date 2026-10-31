@@ -1,0 +1,44 @@
+# Runs on GitHub's free runners (free for public repositories). It needs no
+# credentials and deploys nothing.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+
+      # ALLOW_EXAMPLE lets the build finish while site.config.ts still holds the
+      # example values. In your own repository, delete the `env` lines below once
+      # you have filled in site.config.ts, so CI also blocks leftover placeholders.
+      - run: npm run build
+        env:
+          ALLOW_EXAMPLE: "1"
+
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: test-results/
+          if-no-files-found: ignore
