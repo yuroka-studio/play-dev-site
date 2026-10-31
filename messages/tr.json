@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "homeTitle": "{studio}: Android uygulamaları",
+    "privacyTitle": "Web sitesi gizlilik politikası",
+    "appPrivacyTitle": "{app} gizlilik politikası",
+    "deleteTitle": "{app} hesabınızı ve verilerinizi silin",
+    "deleteDescription": "{developer} geliştiricisinden {app} hesabınızın ve hesabınıza bağlı verilerin silinmesini nasıl isteyeceğiniz.",
+    "notFoundTitle": "Sayfa bulunamadı",
+    "websitePrivacyDescription": "Bu web sitesinin topladığı bilgiler (neredeyse hiçbiri) ve iletişim.",
+    "appPrivacyDescription": "{app} uygulamasının bilgilerle ne yaptığı, uygulamayı kullananlar için yazıldı."
+  },
+  "a11y": {
+    "skipToContent": "İçeriğe geç",
+    "mainNav": "Ana menü",
+    "footerNav": "Yasal bilgiler ve iletişim",
+    "language": "Dil",
+    "appLinks": "{app} bağlantıları",
+    "tocBack": "{studio} ana sayfasına dön"
+  },
+  "nav": {
+    "apps": "Uygulamalar",
+    "contact": "İletişim",
+    "privacy": "Gizlilik"
+  },
+  "home": {
+    "eyebrow": "Android uygulamaları",
+    "appsHeading": "Uygulamalar",
+    "appsEmpty": "İlk uygulamamız yolda.",
+    "contactHeading": "İletişim",
+    "contactBody": "Soru, geri bildirim ve gizlilik talepleriniz için yazabilirsiniz.",
+    "emailLabel": "E-posta",
+    "developerLabel": "Google Play’deki geliştirici adı",
+    "countryLabel": "Merkez"
+  },
+  "app": {
+    "status": {
+      "live": "Google Play’de yayında",
+      "closed-testing": "Kapalı testte",
+      "in-development": "Geliştirme aşamasında"
+    },
+    "play": "Google Play’de görüntüle",
+    "web": "Web sürümünü aç",
+    "privacy": "Gizlilik politikası",
+    "deleteAccount": "Hesabı ve verileri sil",
+    "policyNote": "({code}) ile işaretli bağlantılar {language} dilindedir."
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "body": "Aradığınız sayfa yok ya da taşınmış olabilir.",
+    "back": "Ana sayfaya dön"
+  },
+  "legal": {
+    "updated": "Son güncelleme: {date}",
+    "inShort": "Kısaca",
+    "templateNotice": "Bu sayfa bir başlangıç şablonudur, hukuki tavsiye değildir. Geliştiricinin uygulama hakkındaki yanıtlarından üretilmiştir ve herhangi biri bu metne dayanmadan önce geliştirici tarafından gözden geçirilmelidir.",
+    "templateNoticeLabel": "Not"
+  },
+  "units": {
+    "days": "{count, plural, other {# gün}}",
+    "years": "{count, plural, other {# yıl}}"
+  },
+  "enums": {
+    "identifier": {
+      "email": "e-posta adresi",
+      "username": "kullanıcı adı",
+      "display-name": "görünen ad",
+      "password": "parola",
+      "phone": "telefon numarası",
+      "google-sign-in": "Google ile oturum açma bilgileri",
+      "apple-sign-in": "Apple ile oturum açma bilgileri",
+      "anonymous-id": "uygulamanın oluşturduğu anonim bir kimlik"
+    },
+    "dataCategory": {
+      "account-info": "hesap bilgileri",
+      "user-content": "uygulamada oluşturduğunuz içerik",
+      "settings": "uygulama ayarları ve tercihleri",
+      "usage": "uygulamayı nasıl kullandığınız",
+      "device-info": "temel cihaz bilgileri (model ve Android sürümü gibi)",
+      "crash-logs": "çökme ve hata raporları",
+      "approx-location": "yaklaşık konum",
+      "precise-location": "kesin konum",
+      "photos-media": "eklemeyi seçtiğiniz fotoğraf ve medya",
+      "contacts": "paylaşmayı seçtiğiniz kişiler",
+      "purchase-info": "satın alma bilgileri (sipariş numarası gibi)",
+      "support-messages": "destek ekibine gönderdiğiniz mesajlar"
+    },
+    "permission": {
+      "camera": "Kamera",
+      "microphone": "Mikrofon",
+      "location": "Konum",
+      "photos-media": "Fotoğraflar ve medya",
+      "contacts": "Kişiler",
+      "calendar": "Takvim",
+      "notifications": "Bildirimler",
+      "bluetooth": "Yakındaki cihazlar (Bluetooth)",
+      "files": "Dosyalar ve depolama",
+      "other": "Diğer"
+    }
+  },
+  "policy": {
+    "title": "{app} gizlilik politikası",
+    "eyebrow": "Gizlilik politikası",
+    "intro": "Bu politika, {app} adlı Android uygulamasının bilgilerle ne yaptığını açıklar. Uygulama, {country} merkezli {developer} tarafından Google Play’de yayımlanmaktadır.",
+    "short": {
+      "deviceOnly": "Uygulama verilerinizi cihazınızda saklar ve bize göndermez.",
+      "server": "Uygulama, çalışabilmek için bir sunucuya bazı bilgiler gönderir. Ayrıntılar aşağıdadır.",
+      "account": "Uygulamada kullanıcı hesapları vardır.",
+      "noAccount": "Uygulamada kullanıcı hesabı yoktur.",
+      "ads": "Uygulama reklam gösterir.",
+      "noAds": "Uygulama reklam göstermez.",
+      "payments": "Satın alma işlemlerini Google Play yürütür.",
+      "noPayments": "Uygulamada uygulama içi satın alma yoktur.",
+      "sdks": "Uygulama şu üçüncü taraf hizmetleri kullanır: {list}.",
+      "noSdks": "Uygulamada üçüncü taraf analiz veya çökme raporlama hizmeti yoktur."
+    },
+    "who": {
+      "heading": "Biz kimiz",
+      "body": "{app}, {country} merkezli {developer} tarafından yayımlanmaktadır. Bize <mail>{email}</mail> adresinden ulaşabilirsiniz. Web sitemiz: <web>{site}</web>."
+    },
+    "collect": {
+      "heading": "Uygulamanın işlediği bilgiler",
+      "deviceOnly": "{app}, ayarlarınız ve uygulamada oluşturduklarınız gibi verileri cihazınızda tutar. Bu bilgiler bize veya uygulama için işletilen herhangi bir sunucuya gönderilmez; bu yüzden onları göremeyiz.",
+      "deviceBackup": "Cihaz ayarlarınıza bağlı olarak Android, uygulama verilerini Google hesabı yedeğinize dahil edebilir. Bunu bizim değil, cihazınızın ve Google’ın ayarları belirler.",
+      "server": "Uygulama, çalışabilmesi için bir sunucuya şunları gönderir: {list}.",
+      "serverUse": "Bu bilgileri uygulamanın özelliklerini sunmak ve sürdürmek, ayrıca taleplerinizi yanıtlamak için kullanırız.",
+      "account": "Hesap oluşturmak için bize şunları verirsiniz: {list}."
+    },
+    "services": {
+      "heading": "Üçüncü taraf hizmetler",
+      "sdks": "Uygulama şu üçüncü taraf hizmetleri içerir: {list}. Hizmete göre bunlar çökme raporları, cihaz bilgileri ve uygulamayı nasıl kullandığınız gibi bilgileri toplayabilir ve bu bilgileri kendi gizlilik politikalarına göre işler.",
+      "noSdks": "Uygulama üçüncü taraf analiz veya çökme raporlama hizmeti içermez.",
+      "play": "Uygulamanın Google Play üzerinden yüklenmesi ve güncellenmesi, Google’ın kendi şartları ve gizlilik politikası kapsamındadır."
+    },
+    "ads": {
+      "heading": "Reklamlar",
+      "on": "Uygulama şu sağlayıcıların sunduğu reklamları gösterir: {list}. Reklam sağlayıcıları, reklam kimliğiniz gibi cihaz tanımlayıcılarını ve reklamlarla nasıl etkileşim kurduğunuza dair bilgileri toplayabilir ve bunları kendi gizlilik politikalarına göre işler.",
+      "onChoice": "Android ayarlarınızdan reklam kimliğinizi sıfırlayabilir veya reklam kişiselleştirmeyi kapatabilirsiniz.",
+      "off": "Uygulama reklam göstermez."
+    },
+    "purchases": {
+      "heading": "Satın alma işlemleri",
+      "on": "Uygulama içi satın alma işlemleri Google Play Faturalandırma üzerinden yapılır. Ödemeyi Google işler; bu yüzden ödeme kartı bilgilerinizi hiçbir zaman görmeyiz ve saklamayız. Satın aldığınız şeyi açabilmemiz ve bir sorun olursa size yardımcı olabilmemiz için Google, satın alma işlemleriniz hakkında (örneğin satın alınan ürün, sipariş numarası ve durumu) bize bilgi verir.",
+      "off": "Uygulama, uygulama içi satın alma sunmaz."
+    },
+    "permissions": {
+      "heading": "İzinler",
+      "on": "Uygulama şu izinleri isteyebilir. Bunları reddedebilir veya sonradan cihaz ayarlarınızdan geri alabilirsiniz.",
+      "item": "{label}: {purpose}",
+      "off": "Uygulama, onayınızı gerektiren hiçbir izin istemez."
+    },
+    "sharing": {
+      "heading": "Paylaşım",
+      "some": "Bilgileri yalnızca bu politikada adı geçen hizmet sağlayıcılarla ve yasaların gerektirdiği durumlarda paylaşırız.",
+      "none": "Uygulama bize hiçbir bilgi göndermediği için kimseyle bilgi paylaşmayız."
+    },
+    "retention": {
+      "heading": "Bilgiler ne kadar süre saklanır",
+      "deviceOnly": "Bilgiler, siz silene, uygulamanın depolama alanını temizleyene veya uygulamayı kaldırana kadar cihazınızda kalır.",
+      "untilDeletedAccount": "Hesabınıza bağlı bilgileri, hesabınız var olduğu sürece saklarız. Hesabınızı sildiğinizde bu bilgileri, hesap silme sayfasında anlatıldığı gibi sileriz.",
+      "untilDeleted": "Bu bilgileri, silmemizi isteyene kadar saklarız.",
+      "afterLastUse": "Bu bilgileri, uygulamayı son kullanmanızdan {period} sonra sileriz. Daha erken silmemizi isteyebilirsiniz.",
+      "thirdParty": "Üçüncü taraf hizmetler bilgileri kendi politikalarına göre saklar."
+    },
+    "choices": {
+      "heading": "Seçimleriniz ve verilerinizi silme",
+      "deleteAccount": "Hesabınızı ve hesabınıza bağlı verileri istediğiniz zaman silebilirsiniz. Yönergeler şu sayfadadır: <delete>Hesabınızı ve verilerinizi silin</delete>.",
+      "deleteServer": "Hakkınızda tuttuğumuz bilgilerin silinmesini istemek için <mail>{email}</mail> adresine yazın.",
+      "deleteDevice": "Uygulamanın depolama alanını temizleyerek veya uygulamayı kaldırarak uygulamanın tüm verilerini cihazınızdan silebilirsiniz.",
+      "rights": "Yaşadığınız yere bağlı olarak bilgileriniz üzerinde, bunlara erişmeyi, düzeltmeyi veya silinmesini istemek gibi haklarınız olabilir. Bu hakları kullanmak için <mail>{email}</mail> adresine yazın.",
+      "question": "Bilgilerinizle ilgili her türlü soru için <mail>{email}</mail> adresine yazabilirsiniz."
+    },
+    "security": {
+      "heading": "Güvenlik",
+      "body": "Elimizdeki bilgileri korumak için makul önlemler alırız; ancak hiçbir sistem tamamen güvenli değildir."
+    },
+    "changes": {
+      "heading": "Bu politikadaki değişiklikler",
+      "body": "Uygulamanın bilgileri ele alış biçimini değiştirirsek bu sayfayı ve “Son güncelleme” tarihini güncelleriz. Lütfen zaman zaman kontrol edin."
+    },
+    "contact": {
+      "heading": "İletişim",
+      "body": "{developer}, {country}. E-posta: <mail>{email}</mail>."
+    }
+  },
+  "websitePolicy": {
+    "title": "Web sitesi gizlilik politikası",
+    "eyebrow": "Gizlilik politikası",
+    "intro": "Bu politika yalnızca bu web sitesini kapsar. Her uygulamanın kendi gizlilik politikası vardır.",
+    "short": {
+      "noCookies": "Çerez yok, yerel depolama yok.",
+      "noTracking": "Analiz yok, reklam yok, izleme betiği yok.",
+      "logs": "Her web barındırıcısı gibi {host} da sunucu kayıtları tutar.",
+      "noEmbeds": "Başka sitelerden hiçbir şey yüklenmez."
+    },
+    "who": {
+      "heading": "Bu web sitesini kim işletiyor",
+      "body": "Bu web sitesi, {country} merkezli {developer} ({studio}) tarafından yayımlanmaktadır. Barındırma hizmetini {host} sağlar. Bize <mail>{email}</mail> adresinden ulaşabilirsiniz."
+    },
+    "collect": {
+      "heading": "Bu web sitesinde işlenen bilgiler",
+      "forms": "Yazdığınız hiçbir şey: sitede form, hesap, yorum veya arama yoktur.",
+      "logs": "Barındırıcıdaki sunucu kayıtları. Bir sayfayı açtığınızda {host}; IP adresinizi, istediğiniz sayfayı, zamanı ve tarayıcınızın gönderdiği teknik ayrıntıları (tarayıcı türü ve sizi buraya yönlendiren sayfa gibi) alır. Barındırıcı bu kayıtları siteyi sunmak ve güvende tutmak için <hostlink>kendi gizlilik politikası</hostlink> kapsamında saklar. Bunları sizi izlemek veya profilinizi çıkarmak için kullanmayız.",
+      "logsPlain": "Barındırıcıdaki sunucu kayıtları. Bir sayfayı açtığınızda {host}; IP adresinizi, istediğiniz sayfayı, zamanı ve tarayıcınızın gönderdiği teknik ayrıntıları (tarayıcı türü ve sizi buraya yönlendiren sayfa gibi) alır. Barındırıcı bu kayıtları siteyi sunmak ve güvende tutmak için kendi gizlilik politikası kapsamında saklar. Bunları sizi izlemek veya profilinizi çıkarmak için kullanmayız.",
+      "email": "Bize yazarsanız e-postanız. Adresinizi ve mesajınızı alır, yalnızca size yanıt vermek için kullanır ve yazışmayı ilgilenmemiz gereken süre boyunca saklarız."
+    },
+    "none": {
+      "heading": "Bu web sitesinin yapmadıkları",
+      "cookies": "Çerez bırakmaz, yerel depolama kullanmaz.",
+      "analytics": "Analiz veya izleme betiği içermez.",
+      "ads": "Reklam göstermez.",
+      "embeds": "Başka sitelerden hiçbir şey yüklemez: gömülü video, harita, yazı tipi veya sosyal medya düğmesi yoktur."
+    },
+    "links": {
+      "heading": "Diğer sitelere bağlantılar",
+      "body": "Google Play düğmeleri gibi bağlantılar, başkalarının işlettiği sitelere gider. Bu sitelerin kendi gizlilik politikaları vardır."
+    },
+    "apps": {
+      "heading": "Uygulamalarımız",
+      "body": "Her uygulamanın kendi gizlilik politikası vardır:",
+      "item": "{app} gizlilik politikası",
+      "none": "Henüz uygulama yok."
+    },
+    "choices": {
+      "heading": "Seçimleriniz",
+      "body": "Bu web sitesi, barındırıcının tuttuğu kayıtlar ve bize gönderdiğiniz e-postalar dışında kendi başına kişisel bilgi tutmaz. Gönderdiğiniz bir e-postayla ilgili bir şey sormak için <mail>{email}</mail> adresine yazın."
+    },
+    "changes": {
+      "heading": "Bu politikadaki değişiklikler",
+      "body": "Bu web sitesi yeni bir şey toplamaya başlarsa önce bu sayfayı ve “Son güncelleme” tarihini güncelleriz."
+    },
+    "contact": {
+      "heading": "İletişim",
+      "body": "{developer}, {country}. E-posta: <mail>{email}</mail>."
+    }
+  },
+  "deletePage": {
+    "eyebrow": "Hesap ve veri silme",
+    "title": "{app} hesabınızı ve verilerinizi silin",
+    "intro": "Bu sayfa, {developer} geliştiricisinden {app} hesabınızın ve hesabınıza bağlı verilerin silinmesini nasıl isteyeceğinizi anlatır. Uygulamayı açmadan veya oturum açmadan kullanabilirsiniz.",
+    "how": {
+      "heading": "Silme talebi nasıl yapılır",
+      "inApp": "Uygulamada",
+      "byEmail": "E-posta ile",
+      "emailBody": "Hesabınıza bağlı adresten <mail>{email}</mail> adresine, “{subject}” konusuyla bir e-posta gönderin. Ya da hazır bir mesaj açın: <request>Silme talebi gönder</request>.",
+      "verify": "Hesabınızı korumak için, bir şey silmeden önce hesabın size ait olduğunu doğrulamanızı isteyebiliriz.",
+      "time": "Talebi {period} içinde tamamlarız.",
+      "partial": "Hesabınızı koruyup yalnızca bazı verilerinizin silinmesini istiyorsanız e-postanızda hangi verileri belirtin; yalnızca onları sileriz."
+    },
+    "deleted": {
+      "heading": "Neler silinir",
+      "intro": "Hesabınızı sildiğimizde, bir sonraki bölümde listelenenler dışında hesaba bağlı bilgileri sileriz. Bunlar şunları içerir:",
+      "identifiers": "Oturum açma bilgileriniz: {list}",
+      "data": "Hesabınıza bağlı bilgiler: {list}"
+    },
+    "kept": {
+      "heading": "Neler saklanır ve ne kadar süre",
+      "none": "Hesabınız silindikten sonra bilgilerinizi saklamayız.",
+      "intro": "Hesabınız silindikten sonra bazı bilgilerin saklanması gerekir:",
+      "item": "{what}: {why}. Saklama süresi: {period}.",
+      "backups": "Bilgilerinizin kopyaları, silme işleminden sonra en fazla {period} boyunca yedeklerimizde kalabilir ve ardından silinir.",
+      "play": "Google Play üzerinden yapılan satın alma işlemleri Google tarafından kaydedilir ve Google bunları kendi politikalarına göre saklar. Bizdeki hesabınızı silmek bu kayıtları değiştirmez.",
+      "third": "Gizlilik politikamızda adı geçen üçüncü taraf hizmetlerin elindeki bilgiler kendi politikalarına göre saklanır. Bunları sizin yerinize silemeyiz."
+    },
+    "device": {
+      "heading": "Cihazınızdaki veriler",
+      "body": "Yalnızca cihazınızda saklanan verilere biz ulaşamayız. Bunları silmek için uygulamayı kaldırın veya depolama alanını temizleyin."
+    },
+    "more": "<policy>{app} gizlilik politikasını</policy> okuyun.",
+    "mailSubject": "{app} hesabımı sil",
+    "mailBody": "Merhaba,\n\n{app} hesabımın ve hesabıma bağlı verilerin silinmesini rica ederim.\n\nHesabın e-posta adresi veya kullanıcı adı:\n\nTeşekkürler."
+  }
+}

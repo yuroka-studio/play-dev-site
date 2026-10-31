@@ -1,0 +1,91 @@
+# Netlify (free tier) settings for the static export in out/.
+#
+# Netlify builds the site itself: connect your repository and keep these
+# settings. Everything below is read by Netlify and also by scripts/serve.mjs,
+# the local server used by the tests, so what you test is what you ship.
+#
+# Adding a language? Add its two rules below (a Language redirect for "/" and a
+# "/<code>/*" 404 rule); `npm run build` tells you if one is missing.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# ------------------------------------------------------------------ redirects
+# Rules are evaluated top to bottom; the first match wins. Rules without
+# `force = true` are shadowed by real files, so existing pages are never rewritten.
+
+# "/" -> the visitor's language (302, so the choice is not cached for ever).
+# `force` because out/index.html (a language chooser for hosts without
+# redirects) exists. One rule per non-default language, then the default.
+[[redirects]]
+  from = "/"
+  to = "/tr"
+  status = 302
+  force = true
+  conditions = { Language = ["tr"] }
+
+[[redirects]]
+  from = "/"
+  to = "/en"
+  status = 302
+  force = true
+
+# The 404 documents themselves answer with status 404.
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/:lang/404"
+  to = "/:lang/404.html"
+  status = 404
+  force = true
+
+# Unknown paths: HTTP 404 with the localized page. One rule per language.
+[[redirects]]
+  from = "/tr/*"
+  to = "/tr/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# -------------------------------------------------------------------- headers
+# The site loads nothing from other origins, so the policy is "self" only.
+# 'unsafe-inline' is needed because the static export inlines Next.js's small
+# bootstrap scripts and styles.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+    X-Frame-Options = "SAMEORIGIN"
+
+# Hashed build files never change.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Netlify serves .webmanifest as application/octet-stream by default.
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
