@@ -53,6 +53,11 @@ test("next.config.ts turns off the npm security-advisory check and telemetry", (
   }
 });
 
+test(".npmrc switches off npm's own update check, which would otherwise call the registry on every npm run", () => {
+  const npmrc = fs.readFileSync(path.join(root, ".npmrc"), "utf8");
+  expect(npmrc).toMatch(/^update-notifier\s*=\s*false\s*$/m);
+});
+
 test("npm run dev and npm run build start Next.js through the wrapper that disables telemetry", () => {
   const scripts = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8")).scripts;
   expect(scripts.dev).toBe("node scripts/next.mjs dev");

@@ -17,7 +17,7 @@ English and Turkish are included in full. Another language is one new messages f
 
 ## Promises
 
-- **No paid services.** No paid API, key or cloud service. Neither the build nor the dev server makes a network call of its own (the build passes with the network switched off); only `npm install` talks to the network, plus the one-time `npx playwright install chromium` if you run the tests. Next.js's own telemetry and its npm security-advisory check are switched off in `next.config.ts` and `scripts/next.mjs`, and a test keeps them off.
+- **No paid services.** No paid API, key or cloud service. Neither the build nor the dev server makes a network call of its own (the build passes with the network switched off); only `npm install` talks to the network, plus the one-time `npx playwright install chromium` if you run the tests. Next.js's own telemetry and its npm security-advisory check are switched off in `next.config.ts` and `scripts/next.mjs`, npm's own "new version available" check in `.npmrc`, and a test keeps all three off.
 - **No tracking.** No analytics, no cookies, no local storage, no third-party embeds, no web fonts from a CDN. The tests and the build check this.
 - **Free hosting.** Netlify's free tier is the main target. GitHub Pages and Cloudflare Pages work too.
 - **Small.** Four runtime dependencies (`next`, `next-intl`, `react`, `react-dom`), system fonts, plain CSS, about 1 MB of output, a build of a few seconds.
