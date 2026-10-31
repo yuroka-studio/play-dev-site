@@ -25,7 +25,7 @@ function run(files: Record<string, string>, env: Record<string, string> = {}) {
   }
 }
 
-const CLEAN = { "en.html": "<main><h1>Acme Apps</h1><p>hello@acme.dev</p></main>" };
+const CLEAN = { "en.html": "<main><h1>Acme Apps</h1><p>hello@acme.test</p></main>" };
 const EXAMPLES = [
   "Example Studio",
   "Exampleland",

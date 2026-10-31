@@ -68,11 +68,17 @@
 # The site loads nothing from other origins, so the policy is "self" only.
 # 'unsafe-inline' is needed because the static export inlines Next.js's small
 # bootstrap scripts and styles.
+#
+# Strict-Transport-Security tells browsers to use https for this exact host for
+# a year. It deliberately has no `includeSubDomains`: that would also force https
+# on every subdomain of your domain (mail, a staging site, an old tool), and
+# browsers remember it for the full year. Add `; includeSubDomains` yourself only
+# when every subdomain already serves https.
 [[headers]]
   for = "/*"
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; media-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Strict-Transport-Security = "max-age=31536000"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"

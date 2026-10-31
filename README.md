@@ -17,7 +17,7 @@ English and Turkish are included in full. Another language is one new messages f
 
 ## Promises
 
-- **No paid services.** No paid API, key or cloud service. The build makes no network calls (it passes with the network switched off); only `npm install` talks to the network.
+- **No paid services.** No paid API, key or cloud service. Neither the build nor the dev server makes a network call of its own (the build passes with the network switched off); only `npm install` talks to the network, plus the one-time `npx playwright install chromium` if you run the tests. Next.js's own telemetry and its npm security-advisory check are switched off in `next.config.ts` and `scripts/next.mjs`, and a test keeps them off.
 - **No tracking.** No analytics, no cookies, no local storage, no third-party embeds, no web fonts from a CDN. The tests and the build check this.
 - **Free hosting.** Netlify's free tier is the main target. GitHub Pages and Cloudflare Pages work too.
 - **Small.** Four runtime dependencies (`next`, `next-intl`, `react`, `react-dom`), system fonts, plain CSS, about 1 MB of output, a build of a few seconds.
@@ -38,11 +38,11 @@ Replace `en` with `tr` (or any language you add). Apps without accounts get no d
 
 ## Quick start
 
-1. Click **Use this template** at the top of this repository and create your own repository (make it public if you plan to use GitHub Pages).
-2. Clone it and install: `npm install` (Node 22.18 or newer; `.nvmrc` says 24).
+1. Click **Use this template** at the top of this repository and create your own repository (make it public if you plan to use GitHub Pages). No such button? Fork the repository, or clone it and push it to a new repository of your own.
+2. Clone it and install: `npm install` (Node 22.18 or newer, but not Node 23; `.nvmrc` says 24).
 3. Edit **`site.config.ts`**: your studio name, the developer name shown on Google Play, contact email, country, website URL, accent colour, and your apps. The comments in the file explain each field.
 4. Preview while you edit: `npm run dev` and open <http://localhost:3000/en>.
-5. Build: `npm run build`. The build **stops with a clear message while any example value is left** ("Example Studio", `example.com`, the sample apps ...), so you cannot publish the placeholder site by accident.
+5. Build: `npm run build`. The build **stops with a clear message while the example studio, address or sample apps are still in the output** ("Example Studio", "Exampleland", `example.com`, the three sample apps), and it deletes `out/` when it stops, so you cannot publish the placeholder site by accident. It cannot tell whether you rewrote the other texts in `site.config.ts` (the `about` text, `policyLastUpdated`, the accent colour), so read the [checklist](#before-you-paste-urls-into-play-console).
 6. Deploy the `out/` folder, see [Deploy](#deploy). Then walk through the [checklist](#before-you-paste-urls-into-play-console).
 
 ### Configure `site.config.ts`
@@ -108,14 +108,14 @@ Want the home page in a language but not the legal text yet? Leave it out of `le
 
 ### Netlify (free tier, recommended)
 
-Netlify reads `netlify.toml`, which already holds the build command, the publish folder, Node 24, the language redirect for `/`, localized 404 pages, security headers and cache rules.
+Netlify reads `netlify.toml`, which already holds the build command, the publish folder, Node 24, the language redirect for `/`, localized 404 pages, security headers and cache rules. The headers include HSTS for one year for your exact domain only; it deliberately leaves out `includeSubDomains`, which would also force https on every subdomain you own (see the comment in `netlify.toml` before adding it).
 
 1. Push your repository to GitHub.
 2. In Netlify: **Add new site > Import an existing project**, pick the repository. Leave the detected settings alone (`npm run build`, publish directory `out`). Deploy.
 3. **Domain management > Add a domain** and follow the DNS steps; HTTPS certificates are issued for you.
 4. Check: `/` redirects to your browser's language, `/en/nope` shows the localized 404 page.
 
-Or deploy from your machine without Git: `npm run build`, then `npx netlify-cli deploy --dir out --prod` (it asks you to log in once).
+Or deploy from your machine without Git: `npm run build && npx netlify-cli deploy --dir out --prod` (it asks you to log in once). Keep the `&&`: a failed build must not be followed by a deploy.
 
 ### GitHub Pages (free for public repositories)
 
@@ -151,7 +151,7 @@ Play Console asks **organization** accounts to prove they own their website, by 
 
 A **DNS TXT record** is the easiest method here: nothing changes in this repository, it keeps working across redeploys, and it covers the whole domain.
 
-1. Open [Google Search Console](https://search.google.com/search-console), **Add property**, and choose **Domain** (not URL prefix). Enter your domain without `https://`, for example `your-studio.dev`.
+1. Open [Google Search Console](https://search.google.com/search-console), **Add property**, and choose **Domain** (not URL prefix). Enter your domain without `https://`, for example `your-studio.example`.
 2. Google shows a TXT record that starts with `google-site-verification=`. Copy it.
 3. In your DNS provider (Netlify DNS: **Domains > your domain > DNS records**; Cloudflare: **DNS > Records**; or your registrar) add a record: type **TXT**, name `@` (the bare domain, sometimes left empty), value the string you copied. Save.
 4. Back in Search Console press **Verify**. DNS can take minutes to hours; try again later if it fails.
@@ -178,18 +178,19 @@ Keep the TXT record in place; removing it can undo the verification.
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Dev server at <http://localhost:3000/en> |
+| `npm run dev` | Dev server at <http://localhost:3000/en> (telemetry off, no network calls) |
 | `npm run build` | Static export to `out/`, then the post-build checks |
-| `npm start` | Serves `out/` on <http://localhost:4100> with the redirects and headers of `netlify.toml` |
+| `npm start` | Serves `out/` on <http://localhost:4100> with the redirects and headers of `netlify.toml`. Listens on this computer only; add `-- --host 0.0.0.0` to open it to your network |
 | `npm run lint` / `npm run typecheck` | ESLint / TypeScript |
 | `npm run test:e2e` | Playwright + axe against the built site (`npx playwright install chromium` the first time) |
-| `npm test` | Build, then the tests |
+| `npm test` | Build, then the tests. Needs your own `site.config.ts`: on the untouched template the build stops at the placeholder guard |
+| `npm run test:example` | Build and test the template as shipped, example values included (sets `ALLOW_EXAMPLE=1` for you; the result is never deployable) |
 
 In `npm run dev`, an address that is not generated (for example the delete page of an app without accounts) shows an error page instead of the 404; the built site answers 404.
 
 The post-build step (`scripts/postbuild.mjs`) writes the language chooser, removes unused files, checks that every page the config implies exists and that `netlify.toml` covers every language, and runs the hygiene scan: it fails on leftover example values (unless `ALLOW_EXAMPLE=1`) and on trackers or iframe embeds (never allowed).
 
-`ALLOW_EXAMPLE=1` exists for CI and previews of the example. The CI workflow in this repository sets it; in your own repository, delete that line from `.github/workflows/ci.yml` after you have filled in the config, so CI blocks placeholders too.
+`ALLOW_EXAMPLE=1` exists for CI and previews of the example (`npm run test:example` sets it). When the post-build checks fail, the step deletes `out/` so a half-finished build cannot be deployed. The CI workflow in this repository sets `ALLOW_EXAMPLE`; in your own repository, delete that line from `.github/workflows/ci.yml` after you have filled in the config, so CI blocks placeholders too.
 
 The tests (`e2e/`) check, in every language: every page returns content; policies contain the developer name and email; the delete page exists only for apps with accounts; no horizontal overflow at 320 px; axe finds no WCAG A/AA issues; no cookies, storage or third-party requests; message files stay in step; the placeholder guard works. They read `site.config.ts` and `messages/`, so they keep passing after you replace the example.
 
@@ -213,8 +214,8 @@ docs/                GitHub Pages workflow, screenshots
 
 **play-dev-site**, Google Play Console hesabı açan bağımsız geliştiriciler için küçük, hızlı, statik ve çok dilli bir web sitesi şablonudur. Tek dosyayı, `site.config.ts` dosyasını düzenlersiniz; şablon Play'in istediği her şeyi üretir: geliştirici ana sayfası, her uygulama için gizlilik politikası, hesabı olan uygulamalar için hesap ve veri silme sayfası, web sitesinin kendi gizlilik politikası. İngilizce ve Türkçe metinler hazırdır.
 
-- **Ücretli hizmet yok, izleme yok.** Çerez, analiz, reklam ve üçüncü taraf gömme yoktur. Derleme sırasında ağ çağrısı yapılmaz.
-- **Hızlı başlangıç:** "Use this template" ile kendi deponuzu oluşturun, `npm install`, `site.config.ts` dosyasını kendi bilgilerinizle doldurun, `npm run build`, ardından `out/` klasörünü yayınlayın. Örnek değerler ("Example Studio" gibi) dosyada kaldığı sürece derleme bilinçli olarak hata verir.
+- **Ücretli hizmet yok, izleme yok.** Çerez, analiz, reklam ve üçüncü taraf gömme yoktur. Derleme ve geliştirme sunucusu ağ çağrısı yapmaz (Next.js telemetrisi ve npm güvenlik bildirimi sorgusu kapalıdır); yalnızca `npm install` ağa bağlanır.
+- **Hızlı başlangıç:** "Use this template" ile (düğme yoksa depoyu fork edin ya da klonlayıp kendi deponuza gönderin) kendi deponuzu oluşturun, `npm install`, `site.config.ts` dosyasını kendi bilgilerinizle doldurun, `npm run build`, ardından `out/` klasörünü yayınlayın. Örnek stüdyo, örnek adres ve örnek uygulamalar ("Example Studio" gibi) çıktıda kaldığı sürece derleme bilinçli olarak hata verir ve `out/` klasörünü siler; `about` metni ve `policyLastUpdated` gibi diğer metinleri kendiniz kontrol etmelisiniz.
 - **Ücretsiz yayın:** Netlify (önerilen), GitHub Pages veya Cloudflare Pages. GitHub Pages ve Cloudflare Pages'te dil yönlendirmesi çalışmaz; kök sayfa dil seçimi sunar.
 - **Alan adı doğrulama:** Kurumsal Play hesapları için zorunlu, kişisel hesaplar için önerilir. Search Console'da "Domain" özelliği ekleyin, verilen `google-site-verification=...` TXT kaydını DNS sağlayıcınıza ekleyin ve "Verify" düğmesine basın.
 - **Önemli uyarı:** Üretilen politika metinleri bir başlangıç şablonudur, **hukuki tavsiye değildir**. Metni uygulamanızın gerçekte yaptıklarıyla karşılaştırıp kendiniz gözden geçirmelisiniz. İncelemeyi bitirince `policyLastUpdated` tarihini güncelleyin.

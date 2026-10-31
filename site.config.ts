@@ -6,8 +6,11 @@
 // account-deletion page per app.
 //
 // The values below are a fictional example ("Example Studio"). `npm run build`
-// refuses to finish while any of them is left in the output, so you cannot
-// ship the example by accident. (CI sets ALLOW_EXAMPLE=1 to build it anyway.)
+// refuses to finish while the example studio, country, address or sample apps
+// are left in the output, and deletes out/ when it refuses, so you cannot ship
+// the example by accident. It does not check the other texts (about, the date
+// in policyLastUpdated, accentColor): replace those yourself. (CI sets
+// ALLOW_EXAMPLE=1 to build the example anyway.)
 //
 // Rules for this file:
 //  - Keep it plain data. It is also read by Node scripts, so use only type
