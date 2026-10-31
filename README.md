@@ -1,4 +1,15 @@
-# play-dev-site
+<h1 align="center">play-dev-site</h1>
+
+<p align="center">
+  <a href="https://github.com/yuroka-studio/play-dev-site/actions/workflows/ci.yml"><img src="https://github.com/yuroka-studio/play-dev-site/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="license: MIT">
+  <img src="https://img.shields.io/badge/runtime%20deps-4-informational" alt="runtime deps: 4">
+  <img src="https://img.shields.io/badge/node-%5E22.18%20%7C%7C%20%3E%3D24-informational" alt="node: ^22.18 || >=24">
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> · <a href="#what-google-play-requires-and-which-page-covers-it">What Play requires</a> · <a href="#deploy">Deploy</a> · <a href="#türkçe">Türkçe</a>
+</p>
 
 A small, fast, static, multilingual website for **indie developers opening a Google Play Console account**.
 Edit one file, `site.config.ts`, and it generates everything Google Play asks you to host:
@@ -209,6 +220,15 @@ docs/                GitHub Pages workflow, screenshots
 ```
 
 ---
+
+## More from Yuroka Studio
+
+Small, offline tools with no paid services, all MIT:
+
+- [nightshift-agents](https://github.com/yuroka-studio/nightshift-agents): scheduled coding agents that take one task from a backlog and open a pull request with real test evidence.
+- [shigley-calc](https://github.com/yuroka-studio/shigley-calc): tested machine-element calculators (endurance limit, fatigue, shafts, bolt groups) with an offline web page.
+- [waveform-peaks](https://github.com/yuroka-studio/waveform-peaks): turn songs into compact waveform data for web players.
+- [type-cover](https://github.com/yuroka-studio/type-cover): deterministic, code-generated typographic cover art.
 
 ## Türkçe
 
